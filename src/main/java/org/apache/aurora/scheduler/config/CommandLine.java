@@ -86,6 +86,8 @@ public final class CommandLine {
         .programName(SchedulerMain.class.getName());
 
     builder.addConverterFactory(new IStringConverterFactory() {
+
+
       private Map<Class<?>, Class<? extends IStringConverter<?>>> classConverters =
           ImmutableMap.<Class<?>, Class<? extends IStringConverter<?>>>builder()
               .put(Class.class, ClassConverter.class)
@@ -99,8 +101,8 @@ public final class CommandLine {
 
       @SuppressWarnings("unchecked")
       @Override
-      public <T> Class<? extends IStringConverter<T>> getConverter(Class<T> forType) {
-        return (Class<IStringConverter<T>>) classConverters.get(forType);
+      public Class<? extends IStringConverter<?>> getConverter(Class<?> forType) {
+        return classConverters.get(forType);
       }
     });
 
